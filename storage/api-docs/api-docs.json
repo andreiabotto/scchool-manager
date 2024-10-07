@@ -1,0 +1,724 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Student manager",
+        "description": "Documentation for student manager",
+        "contact": {},
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/generate_token": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Create token for user",
+                "description": "Create token for user",
+                "operationId": "eede7124208ada2fda2eb4d7b090d24d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "teste@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "438309489308450958"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "teste@email.com"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                }
+            }
+        },
+        "/api/classrooms": {
+            "get": {
+                "tags": [
+                    "Classrooms"
+                ],
+                "summary": "Get a list of classrooms",
+                "description": "Returns a list of classrooms",
+                "operationId": "2f72f5470de53ee3c1b98260a19b95ac",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Classrooms"
+                ],
+                "summary": "Create a new classroom",
+                "description": "Creates a new classroom",
+                "operationId": "8e2ce7d8f98adf8e177ee807f293c2f3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Scalable Systems Architecture"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "Learn how to design and implement robust systems that handle high traffic and scale efficiently."
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/classrooms/{id}": {
+            "get": {
+                "tags": [
+                    "Classrooms"
+                ],
+                "summary": "Get classroom by id",
+                "description": "Return a classroom by id",
+                "operationId": "d1dffef915059d675ed37f532aef10f3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Classroom ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "description": "Classroom not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Classrooms"
+                ],
+                "summary": "Update an existing classroom",
+                "description": "Updates an existing classroom",
+                "operationId": "a4c88d898890ebf48d548695b3eb0718",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Classroom ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Scalable Systems Architecture"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "Learn how to design and implement robust systems that handle high traffic and scale efficiently."
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "Classroom not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Classrooms"
+                ],
+                "summary": "Delete a classroom",
+                "description": "Delete a classroom",
+                "operationId": "6a60bd3281c5568275ae795e00ba0e0a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Classroom ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "description": "Classroom not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/students": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get a list of students",
+                "description": "Returns a list of students",
+                "operationId": "75378cfd9c3d128e0846de3d32b101ec",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Create a new student",
+                "description": "Creates a new student",
+                "operationId": "5e69d562cd0a6141ac0ffdd5a921d62b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-12-30"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": "0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/students/{id}": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get student by id",
+                "description": "Return a student by id",
+                "operationId": "00eebadc92fc1451e63b944dc236ce5e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Update an existing student",
+                "description": "Updates an existing student",
+                "operationId": "ab4663f1b3d03e5867d9dce3e8fa14a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-12-30"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": "0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Delete a student",
+                "description": "Deletes a student",
+                "operationId": "ae8784bb4ca4b3b3614a7366dc0f5138",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get list of users",
+                "description": "Returns a list of users",
+                "operationId": "c457726701591d1183b53aa71fc13441",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "description": "Creates a new user",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean",
+                                        "example": "0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by ID",
+                "description": "Returns a user by ID",
+                "operationId": "36a33ff774d5cba33c039dec2c3e0287",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update an existing user",
+                "description": "Updates an existing user",
+                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean",
+                                        "example": "0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a user",
+                "description": "Deletes a user",
+                "operationId": "fa56cffde745d3f152f95cbacd936c0b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Autenticação usando Bearer Token. Formato: 'Bearer <token>'",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        },
+        {
+            "name": "Classrooms",
+            "description": "Classrooms"
+        },
+        {
+            "name": "Students",
+            "description": "Students"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}
